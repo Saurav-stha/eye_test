@@ -51,12 +51,10 @@
 <body>
     <div class="container">
         <div class="row">
-            <div class="col-md-4 top-left-quarter">
-                <img src="{% static 'img/'%}{{random_number}}.webp" alt="Random Image">
-            </div>
             <div class="col-md-8">
                 <div class="buttons-container">
                     {% for i in range %}
+                        
                         <img src="{{ MEDIA_URL }}images/{{ i }}.webp" alt="{{i}} image">
                     
                         <button class="btn btn-primary btn-click-me" id="btn-{{i}}">{{ i }}</button>
@@ -67,36 +65,6 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-   
-    {% comment %} <script>
-        dtotalCount = 0
-        prevData = 0
-          document.querySelectorAll('.btn-click-me').forEach(button => {
-              button.addEventListener('click', function() {
-                  // Log the clicked button's text content to the console
-                  chosenBtn = button.textContent.trim();
-                  console.log('Clicked button:', button.textContent.trim());
-                  document.getElementById('chosen-btn').value = chosenBtn
-                  
-                  totalCount++
-                  random_number = {{random_number}}
-                  if (random_number == chosenBtn){
-                    //console.log(true)
-                    prevData = parseInt(document.getElementById('result-area').value)
-                    prevData++
-                    //console.log(prevData)
-                    
-                  }
-                  document.getElementById('result-area').value = prevData + "/" + totalCount;
-  
-                  url="/save-data/"
-                  fetch(url,{
-  
-                  })
-  
-                  //location.reload()
-              });
-          });
-    </script> {% endcomment %}
+
 </body>
 </html>

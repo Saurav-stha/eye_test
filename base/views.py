@@ -11,7 +11,7 @@ def index(request):
     print(random_number)
     # random_number= int(5)
 
-    context = {'range':range(1,15), 'random_number':random_number}
+    context = {'range':range(1,15), 'random_number':random_number, 'MEDIA_URL': settings.MEDIA_URL}
     return render(request, 'index.html', context)
 
 def tryin(request):

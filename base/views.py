@@ -14,12 +14,19 @@ def index(request):
     context = {'range':range(1,15), 'random_number':random_number, 'MEDIA_URL': settings.MEDIA_URL}
     return render(request, 'index.html', context)
 
+def result(request):
+    # return HttpResponse("result")
+    return render(request, 'result.html')
+
+
+
 def tryin(request):
     return render(request,'try.html')
 
 def showImgs(request):
 
     return render(request, 'show.html', {'range':range(1,15), 'MEDIA_URL': settings.MEDIA_URL})
+
 
 def uploadImg(request):
 

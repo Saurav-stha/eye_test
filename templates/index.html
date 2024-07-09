@@ -22,8 +22,20 @@
                 border-radius: 8px;
             }
         
-            ..buttons-container {
+            .buttons-container {
                 gap: 10px;
+            }
+            label {
+                text-align: right;
+                float: left;
+                margin-right: 15px;
+                text-align: center;
+                line-height: 5 rem; /* Aligns the label with the input vertically */
+            }
+            
+            input {
+                float: left;
+                width: 30px; /* Adjust the width to fit the content */
             }
         
             .buttons-container button {
@@ -47,7 +59,7 @@
             .info-container input {
                 width: 100%;
                 border: none;
-                background-color: #e9ecef;
+                {% comment %} background-color: #e9ecef; {% endcomment %}
             }
 
             .next-button {
@@ -98,7 +110,11 @@
         <div class="container py-4">
             <div class="row">
                 <div class="col-md-6 top-left-quarter">
+                    {% if random_number %}
                     <img src="{{ MEDIA_URL }}images/{{random_number}}.webp" alt="Random Image" class="img-fluid">
+                    {% else %}
+                    <p>No img found</p>
+                    {% endif %}
                 </div>
                 <div class="col-md-6">
                     <div class="buttons-container d-flex flex-wrap mt-4">
@@ -110,19 +126,20 @@
             </div>
         
             <div class="row info-container mt-4">
-                <div class="col-md-6 mb-3">
-                    <label for="chosen-btn" class="form-label">Chosen Number:</label>
+                <div class="col-md-6 mb-3 d-flex align-items-center">
+                    <label for="chosen-btn" class="form-label me-2">Chosen:</label>
                     <input id="chosen-btn" class="form-control" placeholder="choose a number..." readonly>
                 </div>
-                <div class="col-md-3">
-                    <label for="result-area" class="form-label">Total Correct:</label>
+                <div class="col-md-3 d-flex align-items-center mb-3">
+                    <label for="result-area" class="form-label me-2">Correct:</label>
                     <input id="result-area" class="form-control" value="0" readonly>
                 </div>
-                <div class="col-md-3">
-                    <label for="result-area" class="form-label">Total Guess:</label>
+                <div class="col-md-3 d-flex align-items-center mb-3">
+                    <label for="total-guess" class="form-label me-2">Guess:</label>
                     <input id="total-guess" class="form-control" value="0" readonly>
                 </div>
             </div>
+            
         </div>
         <div class="d-flex justify-content-center">
             <button class="next-button" id="next-button">Next</button>
@@ -141,8 +158,9 @@
                 let gotScore = parseInt(localStorage.getItem('score')) || 0;
                 let totalScore = parseInt(localStorage.getItem('totalCount')) || 0;
 
-                if (totalScore > 14){
-                    location.href="{% url 'tryin' %}"
+                if (totalScore > 13){
+                    console.log("over 14")
+                    location.href="{% url 'result-file' %}"
                 }
     
                 // Display the score
@@ -178,6 +196,8 @@
                     // Save the scores back to localStorage
                     localStorage.setItem('score', gotScore);
                     localStorage.setItem('totalCount', totalScore);
+
+                    location.reload()
                 });
             });
 

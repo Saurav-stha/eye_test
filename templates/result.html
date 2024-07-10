@@ -1,53 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        input{
-            border:none
+{% extends "main.html" %}
+
+{% block title %}RESULT{% endblock title %}
+
+{% block content %}
+<div>
+    Result: <h2 id="result-field"></h2>
+    <div>
+        total correct answer: <input id="got-score" readonly>
+    </div>
+    <div>
+        total questions: <input value=14 readonly>
+    </div>
+</div>
+
+<hr>
+<div>
+    <button id="finish-up">FINISH</button>
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // Retrieve scores from localStorage
+        let gotScore = parseInt(localStorage.getItem('score')) || 0;
+        
+        // Display the score
+        document.getElementById('got-score').value = `${gotScore}`;
+        
+        if (gotScore > 12){
+            document.getElementById('result-field').innerHTML = "PASS";
+        }else{
+            document.getElementById('result-field').innerHTML = "FAIL";
+
         }
-    </style>
-</head>
-<body>
-    <div>
-        Result: <h2 id="result-field"></h2>
-        <div>
-            total correct answer: <input id="got-score" readonly>
-        </div>
-        <div>
-            total questions: <input value=14 readonly>
-        </div>
-    </div>
-
-    <hr>
-    <div>
-        <button id="finish-up">FINISH</button>
-    </div>
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            // Retrieve scores from localStorage
-            let gotScore = parseInt(localStorage.getItem('score')) || 0;
-
-            // Display the score
-            document.getElementById('got-score').value = `${gotScore}`;
-            
-            if (gotScore > 12){
-                document.getElementById('result-field').innerHTML = "PASS";
-            }else{
-                document.getElementById('result-field').innerHTML = "FAIL";
-
-            }
-        });
-
-        document.querySelector('#finish-up').addEventListener('click', function() {
+    });
+    
+    document.querySelector('#finish-up').addEventListener('click', function() {
             localStorage.removeItem('score');
             localStorage.removeItem('totalCount');
-
+            
             location.href = "{% url 'index' %}"
-
+            
         });
     </script>
-</body>
-</html>
+{% endblock content %}

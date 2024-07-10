@@ -1,263 +1,178 @@
-    {% load static %}
+{% extends "main.html" %}
+{% block title %}EYE TEST{% endblock title %}
 
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-        <style>
-            * {
-                margin: 0;
-                padding: 0;
-            }
-        
-            body {
-                background-color: #f8f9fa;
-            }
-        
-            .top-left-quarter img {
-                width: 100%;
-                height: auto;
-                border-radius: 8px;
-            }
-        
-            .buttons-container {
-                gap: 10px;
-            }
-            label {
-                text-align: right;
-                float: left;
-                margin-right: 15px;
-                text-align: center;
-                line-height: 5 rem; /* Aligns the label with the input vertically */
-            }
-            
-            input {
-                float: left;
-                width: 30px; /* Adjust the width to fit the content */
-            }
-        
-            .buttons-container button {
-                width: 60px;
-                height: 60px;
-                border-radius: 50%;
-                background-color: brown; /* New button color */
-                color: white;
-                border: none;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 1rem;
-                transition: background-color 0.3s ease;
-            }
-        
-            .buttons-container button:hover {
-                background-color: #0056b3; /* Darker shade for hover */
-            }
-        
-            .info-container input {
-                width: 100%;
-                border: none;
-                {% comment %} background-color: #e9ecef; {% endcomment %}
-            }
-
-            .next-button {
-                margin-top: 20px;
-                padding: 10px 20px;
-                background-color: #28a745; /* Green color */
-                color: white;
-                border: none;
-                border-radius: 5px;
-                font-size: 1rem;
-                transition: background-color 0.3s ease;
-            }
-    
-            .next-button:hover {
-                background-color: #218838; /* Darker green for hover */
-            }
-        </style>
-
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    </head>
-    <body>
-        {% comment %} <div class="container">
-            <div class="row">
-                <div class="col-md-4 top-left-quarter">
-                    <img src="{{ MEDIA_URL }}images/{{random_number}}.webp" alt="Random Image">
-                </div>
-                <div class="col-md-8">
-                    <div class="buttons-container">
-                        {% for i in range %}
-                            <button class="btn btn-primary btn-click-me" id="btn-{{i}}">{{ i }}</button>
-                        {% endfor %}
-                    </div>
+{% block content %}
+    {% comment %} <div class="container">
+        <div class="row">
+            <div class="col-md-4 top-left-quarter">
+                <img src="{{ MEDIA_URL }}images/{{random_number}}.webp" alt="Random Image">
+            </div>
+            <div class="col-md-8">
+                <div class="buttons-container">
+                    {% for i in range %}
+                        <button class="btn btn-primary btn-click-me" id="btn-{{i}}">{{ i }}</button>
+                    {% endfor %}
                 </div>
             </div>
-
-            <div class="row info-container mt-4">
-                <div class="col-md-6">
-                    <label for="chosen-btn" class="form-label">Chosen Number:</label>
-                    <input id="chosen-btn" class="form-control" placeholder="choose a number..." readonly>
-                </div>
-                <div class="col-md-6">
-                    <label for="result-area" class="form-label">Total Correct:</label>
-                    <input id="result-area" class="form-control" value="0/0" readonly>
-                </div>
-            </div>
-        </div> {% endcomment %}
-
-        <div class="container py-4">
-            <div class="row">
-                <div class="col-md-6 top-left-quarter">
-                    {% if random_number %}
-                    <img src="{{ MEDIA_URL }}images/{{random_number}}.webp" alt="Random Image" class="img-fluid">
-                    {% else %}
-                    <p>No img found</p>
-                    {% endif %}
-                </div>
-                <div class="col-md-6">
-                    <div class="buttons-container d-flex flex-wrap mt-4">
-                        {% for i in range %}
-                            <button class="btn btn-primary btn-click-me mb-2 me-2" id="btn-{{i}}">{{ i }}</button>
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
-        
-            <div class="row info-container mt-4">
-                <div class="col-md-6 mb-3 d-flex align-items-center">
-                    <label for="chosen-btn" class="form-label me-2">Chosen:</label>
-                    <input id="chosen-btn" class="form-control" placeholder="choose a number..." readonly>
-                </div>
-                <div class="col-md-3 d-flex align-items-center mb-3">
-                    <label for="result-area" class="form-label me-2">Correct:</label>
-                    <input id="result-area" class="form-control" value="0" readonly>
-                </div>
-                <div class="col-md-3 d-flex align-items-center mb-3">
-                    <label for="total-guess" class="form-label me-2">Guess:</label>
-                    <input id="total-guess" class="form-control" value="0" readonly>
-                </div>
-            </div>
-            
         </div>
-        <div class="d-flex justify-content-center">
-            <button class="next-button" id="next-button">Next</button>
+
+        <div class="row info-container mt-4">
+            <div class="col-md-6">
+                <label for="chosen-btn" class="form-label">Chosen Number:</label>
+                <input id="chosen-btn" class="form-control" placeholder="choose a number..." readonly>
+            </div>
+            <div class="col-md-6">
+                <label for="result-area" class="form-label">Total Correct:</label>
+                <input id="result-area" class="form-control" value="0/0" readonly>
+            </div>
+        </div>
+    </div> {% endcomment %}
+
+    <div class="container py-4">
+        <div class="row">
+            <div class="col-md-6 top-left-quarter">
+                {% if random_number %}
+                <img src="{{ MEDIA_URL }}images/{{random_number}}.webp" alt="Random Image" class="img-fluid">
+                {% else %}
+                <p>No img found</p>
+                {% endif %}
+            </div>
+            <div class="col-md-6">
+                <div class="buttons-container d-flex flex-wrap mt-4">
+                    {% for i in range %}
+                        <button class="btn btn-primary btn-click-me mb-2 me-2" id="btn-{{i}}">{{ i }}</button>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div class="row info-container mt-4">
+            <div class="col-md-6 mb-3 d-flex align-items-center">
+                <label for="chosen-btn" class="form-label me-2">Chosen:</label>
+                <input id="chosen-btn" class="form-control" placeholder="choose a number..." readonly>
+            </div>
+            <div class="col-md-3 d-flex align-items-center mb-3">
+                <label for="result-area" class="form-label me-2">Correct:</label>
+                <input id="result-area" class="form-control" value="0" readonly>
+            </div>
+            <div class="col-md-3 d-flex align-items-center mb-3">
+                <label for="total-guess" class="form-label me-2">Guess:</label>
+                <input id="total-guess" class="form-control" value="0" readonly>
+            </div>
         </div>
         
-        
-        
+    </div>
+    <div class="d-flex justify-content-center">
+        <button class="next-button" id="next-button">Next</button>
+    </div>
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    
-       
 
-        <script>
-            document.addEventListener("DOMContentLoaded", () => {
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Retrieve scores from localStorage
+            let gotScore = parseInt(localStorage.getItem('score')) || 0;
+            let totalScore = parseInt(localStorage.getItem('totalCount')) || 0;
+
+            if (totalScore > 13){
+                console.log("over 14")
+                location.href="{% url 'result-file' %}"
+            }
+
+            // Display the score
+            document.getElementById('result-area').value = `${gotScore}`;
+            document.getElementById('total-guess').value = `${totalScore}`;
+        });
+
+        document.querySelectorAll('.btn-click-me').forEach(button => {
+            button.addEventListener('click', function() {
+                // Get the chosen button number
+                let chosenBtn = button.textContent.trim();
+                document.getElementById('chosen-btn').value = chosenBtn;
+
+                // Retrieve random_number from template
+                let random_number = {{random_number}};
+
                 // Retrieve scores from localStorage
                 let gotScore = parseInt(localStorage.getItem('score')) || 0;
                 let totalScore = parseInt(localStorage.getItem('totalCount')) || 0;
 
-                if (totalScore > 13){
-                    console.log("over 14")
-                    location.href="{% url 'result-file' %}"
+                // Increment the total count
+                totalScore++;
+
+                // Check if the chosen number is correct
+                if (parseInt(chosenBtn) === random_number) {
+                    gotScore++;
                 }
-    
-                // Display the score
+
+                // Update the result area
                 document.getElementById('result-area').value = `${gotScore}`;
                 document.getElementById('total-guess').value = `${totalScore}`;
+
+                // Save the scores back to localStorage
+                localStorage.setItem('score', gotScore);
+                localStorage.setItem('totalCount', totalScore);
+
+                location.reload()
             });
-    
-            document.querySelectorAll('.btn-click-me').forEach(button => {
-                button.addEventListener('click', function() {
-                    // Get the chosen button number
-                    let chosenBtn = button.textContent.trim();
-                    document.getElementById('chosen-btn').value = chosenBtn;
-    
-                    // Retrieve random_number from template
-                    let random_number = {{random_number}};
-    
-                    // Retrieve scores from localStorage
-                    let gotScore = parseInt(localStorage.getItem('score')) || 0;
-                    let totalScore = parseInt(localStorage.getItem('totalCount')) || 0;
-    
-                    // Increment the total count
-                    totalScore++;
-    
-                    // Check if the chosen number is correct
-                    if (parseInt(chosenBtn) === random_number) {
-                        gotScore++;
-                    }
-    
-                    // Update the result area
-                    document.getElementById('result-area').value = `${gotScore}`;
-                    document.getElementById('total-guess').value = `${totalScore}`;
-    
-                    // Save the scores back to localStorage
-                    localStorage.setItem('score', gotScore);
-                    localStorage.setItem('totalCount', totalScore);
+        });
 
-                    location.reload()
-                });
-            });
+        document.getElementById('next-button').addEventListener('click', function() {
+            location.reload();
+        });
+    </script>
+    <!-- <script>
+        var gotScore,totalScore
 
-            document.getElementById('next-button').addEventListener('click', function() {
-                location.reload();
-            });
-        </script>
-         <!-- <script>
-            var gotScore,totalScore
+        document.addEventListener("DOMContentLoaded", ()=>{
+            var gotScore = localStorage.getItem('score')
+            var totalScore = localStorage.getItem('totalCount')
 
-            document.addEventListener("DOMContentLoaded", ()=>{
-                var gotScore = localStorage.getItem('score')
-                var totalScore = localStorage.getItem('totalCount')
+            if (gotScore == null || totalScore == null){
+                gotScore = 0
+                totalScore = 0
+            }
 
-                if (gotScore == null || totalScore == null){
-                    gotScore = 0
-                    totalScore = 0
+            //console.log(gotScore)
+            document.getElementById('result-area').value = gotScore + "/" +totalScore
+        })
+        
+        
+        totalCount = 0
+        prevData = 0
+        document.querySelectorAll('.btn-click-me').forEach(button => {
+            button.addEventListener('click', function() {
+                // Log the clicked button's text content to the console
+                chosenBtn = button.textContent.trim();
+                console.log('Clicked button:', button.textContent.trim());
+                document.getElementById('chosen-btn').value = chosenBtn
+                
+                totalCount++
+                random_number = {{random_number}}
+                //console.log(random_number)
+                if (random_number == chosenBtn){
+                //console.log(true)
+                prevData = parseInt(document.getElementById('result-area').value)
+                prevData++
+                //console.log(prevData)
+                
                 }
+                document.getElementById('result-area').value = prevData + "/" + totalCount;
 
-                //console.log(gotScore)
-                document.getElementById('result-area').value = gotScore + "/" +totalScore
-            })
-            
-            
-            totalCount = 0
-            prevData = 0
-            document.querySelectorAll('.btn-click-me').forEach(button => {
-              button.addEventListener('click', function() {
-                  // Log the clicked button's text content to the console
-                  chosenBtn = button.textContent.trim();
-                  console.log('Clicked button:', button.textContent.trim());
-                  document.getElementById('chosen-btn').value = chosenBtn
-                  
-                  totalCount++
-                  random_number = {{random_number}}
-                  //console.log(random_number)
-                  if (random_number == chosenBtn){
-                    //console.log(true)
-                    prevData = parseInt(document.getElementById('result-area').value)
-                    prevData++
-                    //console.log(prevData)
-                    
-                  }
-                  document.getElementById('result-area').value = prevData + "/" + totalCount;
-  
-                //   url="/save-data/"
-                //   fetch(url,{
-  
-                //   })
-  
-                  //location.reload()
+            //   url="/save-data/"
+            //   fetch(url,{
+
+            //   })
+
+                //location.reload()
 
 
-                  localStorage.setItem()
-              });
-          });
-            
+                localStorage.setItem()
+            });
+        });
+        
 
-            
-            {% comment %} console.log(document.querySelector('#result-area')) {% endcomment %}
-        </script> -->
-    </body>
-    </html>
+        
+        {% comment %} console.log(document.querySelector('#result-area')) {% endcomment %}
+    </script> -->
+{% endblock content %}
+

@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+{% extends "main.html" %}
+
+{% block title %}UPLOAD TEST IMAGE{% endblock title %}
+
+{% block content %}
     
     <form method="POST" action="" enctype="multipart/form-data">
         {% csrf_token %}
@@ -32,5 +29,4 @@
             <img src="{{ img_obj.imgSrc.url}}" alt="connect" style="max-height:300px">
         {% endif %}
     
-</body>
-</html>
+{% endblock content %}

@@ -12,6 +12,7 @@ urlpatterns = [
     path("result", views.result, name="result-file"),
     path('try/',views.tryin, name="tryin"),
     path('show/',views.showImgs, name="show-imgs"),
+    path('signup/', views.signup, name="signup"),
 ]
 
 

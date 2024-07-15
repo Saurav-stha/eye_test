@@ -1,32 +1,33 @@
 {% extends "main.html" %}
 
-{% block title %}UPLOAD TEST IMAGE{% endblock title %}
+{% block title %}Upload Test Image{% endblock title %}
 
 {% block content %}
-    
-    <form method="POST" action="" enctype="multipart/form-data">
-        {% csrf_token %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-dark text-white">
+                    <h4 class="card-title text-center">Upload Test Image</h4>
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-success">Upload</button>
+                        </div>
+                    </form>
 
-        {{ form.as_p }}  
-        <button type="submit">Upload</button>
-
-        {% comment %} <div class="form-group">
-            
-            <label for="img-name">Name of image:</label>
-            <input type="text" name="img-name" id="">
-            
+                    {% if img_obj %}
+                    <div class="mt-4 text-center">
+                        <h5>Successfully uploaded: {{ img_obj.name }}</h5>
+                        <img src="{{ img_obj.imgSrc.url }}" alt="Uploaded Image" class="img-fluid" style="max-height: 300px;">
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="exampleFormControlFile1">Example file input</label>
-            <input type="file" class="form-control-file" id="exampleFormControlFile1">
-        </div>
-
-            <input type="submit" value="Upload Image"> {% endcomment %}
-      </form>
-
-        {% if img_obj %}  
-            <h3>Succesfully uploaded : {{img_obj.name}}</h3> 
-            <img src="{{ img_obj.imgSrc.url}}" alt="connect" style="max-height:300px">
-        {% endif %}
-    
+    </div>
+</div>
 {% endblock content %}

@@ -38,7 +38,11 @@
     .info-container input {
         width: 100%;
         border: none;
-        background-color: #e9ecef;
+        background-color: transparent;
+        box-shadow: none;
+        font-family: inherit;
+        padding: 0;
+        margin: 0;
     }
 
     .next-button {
@@ -54,6 +58,22 @@
 
     .next-button:hover {
         background-color: #218838;
+    }
+
+    .card-custom {
+        background-color: #fff;
+        border: 1px solid #e9ecef;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-body-custom {
+        padding: 20px;
+    }
+
+    .form-label-custom {
+        margin-right: 10px;
+        font-weight: bold;
     }
 </style>
 {% endblock style %}
@@ -77,18 +97,26 @@
         </div>
     </div>
 
-    <div class="row info-container mt-4">
-        <div class="col-md-6 mb-3 d-flex align-items-center">
-            <label for="chosen-btn" class="form-label me-2">Chosen:</label>
-            <input id="chosen-btn" class="form-control" placeholder="choose a number..." readonly>
-        </div>
-        <div class="col-md-3 d-flex align-items-center mb-3">
-            <label for="result-area" class="form-label me-2">Correct:</label>
-            <input id="result-area" class="form-control" value="0" readonly>
-        </div>
-        <div class="col-md-3 d-flex align-items-center mb-3">
-            <label for="total-guess" class="form-label me-2">Guess:</label>
-            <input id="total-guess" class="form-control" value="0" readonly>
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <div class="card card-custom">
+                <div class="card-body card-body-custom">
+                    <div class="row">
+                        <div class="col-md-4 mb-3 d-flex align-items-center">
+                            <label for="chosen-btn" class="form-label form-label-custom">Chosen:</label>
+                            <input id="chosen-btn" class="form-control" placeholder="choose a number..." readonly>
+                        </div>
+                        <div class="col-md-4 mb-3 d-flex align-items-center">
+                            <label for="result-area" class="form-label form-label-custom">Correct:</label>
+                            <input id="result-area" class="form-control" value="0" readonly>
+                        </div>
+                        <div class="col-md-4 mb-3 d-flex align-items-center">
+                            <label for="total-guess" class="form-label form-label-custom">Guess:</label>
+                            <input id="total-guess" class="form-control" value="0" readonly>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -96,6 +124,7 @@
         <button class="next-button" id="next-button">Next</button>
     </div>
 </div>
+
 
 <script>
     document.addEventListener("DOMContentLoaded", () => {

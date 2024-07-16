@@ -6,16 +6,18 @@
 <div>
     Result: <h2 id="result-field"></h2>
     <div>
-        total correct answer: <input id="got-score" readonly>
+        <form method="post">
+            {% csrf_token %}
+            total correct answer: <input id="got-score" name="gotScore" readonly>
+            <div>
+                total questions: <input value="14" readonly>
+            </div>
+            <hr>
+            <div>
+                <button id="finish-up" type="submit">FINISH</button>
+            </div>
+        </form>
     </div>
-    <div>
-        total questions: <input value=14 readonly>
-    </div>
-</div>
-
-<hr>
-<div>
-    <button id="finish-up">FINISH</button>
 </div>
 <script>
     document.addEventListener("DOMContentLoaded", () => {

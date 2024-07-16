@@ -9,6 +9,9 @@ from django.conf import settings
 from .forms import RegistrationForm
 from django.contrib.auth import login
 
+from .models import UserScore
+from django.contrib.auth.decorators import login_required
+
 def index(request):
     random_number = random.randint(1, 14)
     print(random_number)
@@ -17,8 +20,26 @@ def index(request):
     context = {'range':range(1,15), 'random_number':random_number, 'MEDIA_URL': settings.MEDIA_URL}
     return render(request, 'index.html', context)
 
+@login_required
 def result(request):
     # return HttpResponse("result")
+
+    if request.method == "POST":
+        
+        score = request.POST.get('gotScore')
+
+        score = int(score)
+
+        print("ScoreL ", score, "User: ", request.user)
+        user_score, created = UserScore.objects.get_or_create(name=request.user)
+        user_score.score = score
+        user_score.save()
+
+        return redirect(request, 'index.html')
+         
+
+        # return HttpResponse("saved successfully")
+    
     return render(request, 'result.html')
 
 def signup(request):

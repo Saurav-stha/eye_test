@@ -1,6 +1,9 @@
 from django import forms
 from .models import Image
 
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+
 class ImageForm(forms.ModelForm):
     # name = forms.CharField(max_length=255)
     # imgName = forms.ImageField()
@@ -10,8 +13,6 @@ class ImageForm(forms.ModelForm):
         fields = ('name','imgSrc')
 
 
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
 
 class RegistrationForm(UserCreationForm):
     # no email in default usercreationform so adding 

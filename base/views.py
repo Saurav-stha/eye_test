@@ -22,23 +22,22 @@ def index(request):
 
 @login_required
 def result(request):
-    # return HttpResponse("result")
-
     if request.method == "POST":
-        
         score = request.POST.get('gotScore')
-
         score = int(score)
 
-        print("ScoreL ", score, "User: ", request.user)
-        user_score, created = UserScore.objects.get_or_create(name=request.user)
-        user_score.score = score
+        print("Score: ", score, "User: ", request.user)
+
+        # Create a new UserScore entry for each test
+        user_score = UserScore.objects.create(
+            name=request.user,
+            score=score,
+            testCount=UserScore.objects.filter(name=request.user).count() + 1
+        )
+
         user_score.save()
 
-        return redirect(request, 'index.html')
-         
-
-        # return HttpResponse("saved successfully")
+        return redirect('index')  # Use the name of the URL pattern here
     
     return render(request, 'result.html')
 

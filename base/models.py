@@ -10,8 +10,8 @@ class Image(models.Model):
 
 
 class UserScore(models.Model):
-    name = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    score = models.CharField(max_length=2)
 
-    def __str__(self):
-        return self.score
+    name = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    score = models.IntegerField(default=0)
+    testCount = models.IntegerField(default=1)
+    test_date = models.DateTimeField(auto_now_add=True)

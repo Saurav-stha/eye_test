@@ -1,0 +1,50 @@
+{% extends "main.html" %}
+
+{% block title %}History{% endblock title %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Your Test History</h2>
+    <div class="row">
+        <div class="col">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Test Number</th>
+                            <th>Score</th>
+                            <th>Date & Time</th>
+                            <th>Status</th> <!-- New column -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for record in records %}
+                            {% if record.name == request.user %}
+                                <tr>
+                                    <td>{{ record.testCount }}</td>
+                                    <td>{{ record.score }}</td>
+                                    <td>{{ record.test_date }}</td>
+                                    <td>
+                                        {% if record.score > 12 %}
+                                            <span class="text-success">Pass</span>
+                                        {% else %}
+                                            <span class="text-danger">Fail</span>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block style %}
+<style>
+    /* Custom styles specific to history.html */
+    /* Add any custom styles here */
+</style>
+{% endblock style %}

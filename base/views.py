@@ -59,6 +59,14 @@ def signup(request):
     return render(request, 'registration/signup.html', {'form' : form})
 
 
+def history(request):
+
+    records = UserScore.objects.all()
+
+    context = {'records' : records}
+    return render(request,'history.html', context)
+
+
 def tryin(request):
     return render(request,'try.html')
 

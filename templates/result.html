@@ -3,44 +3,56 @@
 {% block title %}RESULT{% endblock title %}
 
 {% block content %}
-<div>
-    Result: <h2 id="result-field"></h2>
-    <div>
-        <form method="post">
-            {% csrf_token %}
-            total correct answer: <input id="got-score" name="gotScore" readonly>
-            <div>
-                total questions: <input value="14" readonly>
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title text-center">Result</h3>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <h4 id="result-field" class="text-center"></h4>
+                    </div>
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="got-score" class="form-label">Total Correct Answers:</label>
+                            <input type="text" id="got-score" name="gotScore" class="form-control" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="total-questions" class="form-label">Total Questions:</label>
+                            <input type="text" id="total-questions" value="14" class="form-control" readonly>
+                        </div>
+                        <hr>
+                        <div class="text-center">
+                            <button id="finish-up" type="submit" class="btn btn-primary">FINISH</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <hr>
-            <div>
-                <button id="finish-up" type="submit">FINISH</button>
-            </div>
-        </form>
+        </div>
     </div>
 </div>
+
 <script>
     document.addEventListener("DOMContentLoaded", () => {
-        // Retrieve scores from localStorage
         let gotScore = parseInt(localStorage.getItem('score')) || 0;
+        document.getElementById('got-score').value = gotScore;
         
-        // Display the score
-        document.getElementById('got-score').value = `${gotScore}`;
-        
-        if (gotScore > 12){
-            document.getElementById('result-field').innerHTML = "PASS";
-        }else{
-            document.getElementById('result-field').innerHTML = "FAIL";
-
+        if (gotScore > 12) {
+            document.getElementById('result-field').textContent = "PASS";
+            document.getElementById('result-field').classList.add('text-success');
+        } else {
+            document.getElementById('result-field').textContent = "FAIL";
+            document.getElementById('result-field').classList.add('text-danger');
         }
     });
-    
+
     document.querySelector('#finish-up').addEventListener('click', function() {
-            localStorage.removeItem('score');
-            localStorage.removeItem('totalCount');
-            
-            location.href = "{% url 'index' %}"
-            
-        });
-    </script>
+        localStorage.removeItem('score');
+        localStorage.removeItem('totalCount');
+        location.href = "{% url 'index' %}";
+    });
+</script>
 {% endblock content %}

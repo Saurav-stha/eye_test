@@ -9,32 +9,44 @@
         <div class="col">
             <div class="table-responsive">
                 <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Test Number</th>
-                            <th>Score</th>
-                            <th>Date & Time</th>
-                            <th>Status</th> <!-- New column -->
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for record in records %}
-                            {% if record.name == request.user %}
+                    {% if loggedIn %}
+                        {% if records|length > 0 %}
+                            <thead>
                                 <tr>
-                                    <td>{{ record.testCount }}</td>
-                                    <td>{{ record.score }}</td>
-                                    <td>{{ record.test_date }}</td>
-                                    <td>
-                                        {% if record.score > 12 %}
-                                            <span class="text-success">Pass</span>
-                                        {% else %}
-                                            <span class="text-danger">Fail</span>
-                                        {% endif %}
-                                    </td>
+                                    <th>Test Number</th>
+                                    <th>Score</th>
+                                    <th>Date & Time</th>
+                                    <th>Status</th>
                                 </tr>
-                            {% endif %}
-                        {% endfor %}
-                    </tbody>
+                            </thead>
+                            <tbody>
+                                {% for record in records %}
+                                    <tr>
+                                        <td>{{ record.testCount }}</td>
+                                        <td>{{ record.score }}</td>
+                                        <td>{{ record.test_date }}</td>
+                                        <td>
+                                            {% if record.score > 12 %}
+                                                <span class="text-success">Pass</span>
+                                            {% else %}
+                                                <span class="text-danger">Fail</span>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        {% else %}
+                            <tr>
+                                <td colspan="4" class="text-center">No records found.</td>
+                            </tr>
+                        {% endif %}
+                    {% else %}
+                        <tr>
+                            <td colspan="4" class="text-center">
+                                Please <a href="{% url 'login' %}">login</a> first to view your test history.
+                            </td>
+                        </tr>
+                    {% endif %}
                 </table>
             </div>
         </div>
@@ -44,7 +56,6 @@
 
 {% block style %}
 <style>
-    /* Custom styles specific to history.html */
-    /* Add any custom styles here */
+    /* Add custom styles here if needed */
 </style>
 {% endblock style %}

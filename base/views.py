@@ -60,10 +60,14 @@ def signup(request):
 
 
 def history(request):
+    if (request.user.is_authenticated):
+        records = UserScore.objects.filter(name = request.user)
+        loggedIn = 1
+    else:
+        loggedIn = 0
+        records = [] # necessary to provide in context
 
-    records = UserScore.objects.all()
-
-    context = {'records' : records}
+    context = {'records' : records, 'loggedIn': loggedIn}
     return render(request,'history.html', context)
 
 
